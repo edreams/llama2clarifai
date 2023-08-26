@@ -1,0 +1,13 @@
+openai
+chromadb==0.3.26
+faiss-cpu==1.7.4
+tiktoken==0.4.0
+langchain==0.0.221
+python-dotenv==1.0.0
+aiofiles==23.1.0
+pydantic==1.10.7
+unstructured==0.5.9
+tabulate==0.9.0
+pdf2image==1.16.3
+pytesseract==0.3.10
+clarifai
