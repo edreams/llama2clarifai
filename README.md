@@ -48,13 +48,13 @@ Request Body:
 }
 ```
 
-### 3. /add_data Endpoint
+### 3. /trainpdf Endpoint
 
 If the same data_id is used for a different files all the data from the files will be appended and then all the data will be considered when answering a question
 Use this endpoint to add data using a PDF file.
 
 HTTP Method: POST
-Endpoint: /add_data
+Endpoint: /trainpdf
 Request Body:
 
 file: Upload the PDF file.
