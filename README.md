@@ -49,6 +49,7 @@ Request Body:
 ```
 
 3. /add_data Endpoint
+If the same data_id is used for a different files all the data from the files will be appended and then all the data will be considered when answering a question
 Use this endpoint to add data using a PDF file.
 
 HTTP Method: POST
@@ -57,3 +58,16 @@ Request Body:
 
 file: Upload the PDF file.
 data_id: Specify the data ID as a string.
+
+4. /delete Endpoint
+This endpoint deletes embeddings already stored for the specific data_id.
+
+HTTP Method: POST
+Endpoint: /generate_image_caption
+
+Request Body:
+```json
+{
+    "data_id": "1"
+}
+```
