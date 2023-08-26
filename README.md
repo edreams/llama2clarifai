@@ -62,7 +62,7 @@ data_id: Specify the data ID as a string.
 
 
 
-### 4. `/chat` Endpoint
+### 4. `/traintube` Endpoint
 
 Use this endpoint to initiate a chat with the OpenAI model.
 
