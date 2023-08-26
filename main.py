@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from routers import chat
 from routers import vector
 from routers import caption
+from routers import youtube
 # Load the environment variables from the .env file
 load_dotenv()
 
@@ -20,7 +21,7 @@ app.include_router(caption.router)
 
 app.include_router(vector.router)
 
-
+app.include_router(youtube.router)
 
 
 if __name__== '__main__':
