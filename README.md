@@ -12,6 +12,9 @@
   OPENAI_API_KEY=your-api-key
 ```
 
+3. Install all requirements from requirements.txt file
+
+
 ## Endpoints
 
 ### 1. `/chat` Endpoint
