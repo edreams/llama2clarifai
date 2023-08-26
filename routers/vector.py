@@ -19,7 +19,7 @@ router = APIRouter()
 
 
 
-@router.post("/add_data")
+@router.post("/trainpdf")
 async def train(file: UploadFile = File(...), data_id: str = Form(...)):
     try:
         persist_directory = f'trained_db/{data_id}/{data_id}_all_embeddings'
