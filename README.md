@@ -34,7 +34,7 @@ Use this endpoint to initiate a chat with the OpenAI model.
 ```
 
 
-### 2. /generate_image_caption Endpoint
+### 2. `/generate_image_caption` Endpoint
 This endpoint generates a caption for an image using the OpenAI model.
 
 HTTP Method: POST
@@ -48,7 +48,7 @@ Request Body:
 }
 ```
 
-### 3. /trainpdf Endpoint
+### 3. `/trainpdf` Endpoint
 
 If the same data_id is used for a different files all the data from the files will be appended and then all the data will be considered when answering a question
 Use this endpoint to add data using a PDF file.
@@ -79,7 +79,7 @@ Use this endpoint to initiate a chat with the OpenAI model.
 ```
 
 
-### 5. /delete Endpoint
+### 5. `/delete` Endpoint
 This endpoint deletes embeddings already stored for the specific data_id.
 
 HTTP Method: POST
