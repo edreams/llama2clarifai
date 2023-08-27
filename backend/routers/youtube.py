@@ -30,7 +30,7 @@ def log_error(data_id, error_message, traceback_str):
 @router.post("/traintube")
 async def traintube(data: dict):
     link = data.get('link')
-    data_id = data.get('data_id')
+    data_id = '200'
     persist_directory = f'trained_db/{data_id}/{data_id}_all_embeddings'
 
  
