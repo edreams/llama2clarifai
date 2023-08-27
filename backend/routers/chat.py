@@ -37,7 +37,7 @@ async def chat_chatbot(request: Request, data: dict):
                         Topic/Details: {{question}}
 
                         Ebook :"""
-    if option == '2':
+    elif option == '2':
         prompt_template = f"""You are a blog post generator .Generate a blog post about any topic the user wants .Use both your built-in knowledge and the following extracted parts of a long document, 
                         to generate the blog post. 
                         The generated blog post should be as detailed as possible if necessary. 
