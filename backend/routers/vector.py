@@ -19,7 +19,7 @@ router = APIRouter()
 
 
 
-@router.post("/add_data")
+@router.post("/trainpdf")
 async def train(file: UploadFile = File(...), data_id: str = Form(...)):
     try:
         persist_directory = f'trained_db/{data_id}/{data_id}_all_embeddings'
@@ -46,22 +46,24 @@ async def train(file: UploadFile = File(...), data_id: str = Form(...)):
                         old_vectordb = FAISS.load_local(persist_directory, embeddings)
                         old_vectordb.merge_from(new_vectordb)
                         old_vectordb.save_local(persist_directory)
-                        print("Previous Embeddings were loaded.")
+                        return {'message':" Embeddings Generated Sucessfully."}
+
+
                     except:
                         new_vectordb.save_local(persist_directory)
-                        print("New VectorStore is initialized")
+                        return {'message':" New Embeddings Generated Sucessfully."}
+
+
 
                 except Exception as e:
                     # Log the traceback information to a file
                     error_message = f"Error processing PDF: {str(e)}"
                     traceback_str = traceback.format_exc()
                     log_error(data_id, error_message, traceback_str)
-                    return {'answer': "Rate Limit Reached For Your Account"}
+                    return {'message': "Error processing PDF Check logs for details"}
 
                 finally:
                     shutil.rmtree(pdf_folder_path)
-
-                return {'answer': "PDF EMBEDDINGS GENERATED SUCCESSFULLY"}
 
         else:
             return {'error': "ONLY PDF FILE ALLOWED FOR NOW"}
@@ -94,10 +96,10 @@ async def deletetxt(request: Request, data: dict):
     if os.path.exists(delete_directory):
         # Delete the directory and its contents
         shutil.rmtree(delete_directory)
-        return {'answer': f"All Embeddings for data_id : {data_id} deleted successfully."}
+        return {'message': f"All Embeddings for data_id : {data_id} deleted successfully."}
      
     else:
-        return {'answer': f"No embeddings found for data id : {data_id} "}
+        return {'message': f"No embeddings found for data id : {data_id} "}
     
 
 
