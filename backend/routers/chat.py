@@ -19,12 +19,12 @@ print(CLARIFAI_PAT)
 @router.post('/chat')
 async def chat_chatbot(request: Request, data: dict):
     details = data.get('details')
-    data_id = data.get('data_id')  
+    data_id = "200" 
     option = data.get('option')
     print("Valor de Option")
     print(option)
     print(type(option))
-    api = data.get('api')
+    api = "a6a0fdf9e62f4ae98b0c87aaba91e143"
     USER_ID = "meta"
     APP_ID = "Llama-2"
     MODEL_ID = "llama2-70b-chat"
