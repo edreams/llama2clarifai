@@ -9,27 +9,33 @@ from langchain.prompts import PromptTemplate
 from langchain.vectorstores import FAISS
 from langchain import PromptTemplate
 from langchain.llms import Clarifai
+from decouple import config  # Importamos config desde decouple
 router = APIRouter()
 
 
-
+# Utilizamos config para obtener el valor de CLARIFAI_PAT desde el archivo .env
+CLARIFAI_PAT = config("CLARIFAI_PAT")
+print(CLARIFAI_PAT)
 @router.post('/chat')
 async def chat_chatbot(request: Request, data: dict):
     details = data.get('details')
     data_id = data.get('data_id')  
     option = data.get('option')
+    print("Valor de Option")
+    print(option)
+    print(type(option))
     api = data.get('api')
     USER_ID = "meta"
     APP_ID = "Llama-2"
     MODEL_ID = "llama2-70b-chat"
     # Initialize a Clarifai LLM
     clarifai_llm = Clarifai(
-    clarifai_pat_key=api, user_id=USER_ID, app_id=APP_ID, model_id=MODEL_ID)
+    clarifai_pat_key=CLARIFAI_PAT, user_id=USER_ID, app_id=APP_ID, model_id=MODEL_ID)
 
     persist_directory = f"trained_db/{data_id}/{data_id}_all_embeddings" 
                             
     embeddings = OpenAIEmbeddings()
-    if option == '1':
+    if str(option) == "1":
         prompt_template = f"""You are a Ebook generator. Generate the ebook using your built-in knowledge and the following extracted parts of a long document.
                         The Ebook should be as detailed and long as possible. 
                         {{context}}
@@ -37,7 +43,7 @@ async def chat_chatbot(request: Request, data: dict):
                         Topic/Details: {{question}}
 
                         Ebook :"""
-    if option == '2':
+    elif option == '2':
         prompt_template = f"""You are a blog post generator .Generate a blog post about any topic the user wants .Use both your built-in knowledge and the following extracted parts of a long document, 
                         to generate the blog post. 
                         The generated blog post should be as detailed as possible if necessary. 
