@@ -15,8 +15,9 @@ router = APIRouter()
 
 @router.post('/chat')
 async def chat_chatbot(request: Request, data: dict):
-    query = data.get('query')
+    details = data.get('details')
     data_id = data.get('data_id')  
+    option = data.get('option')
     api = data.get('api')
     USER_ID = "meta"
     APP_ID = "Llama-2"
@@ -28,16 +29,26 @@ async def chat_chatbot(request: Request, data: dict):
     persist_directory = f"trained_db/{data_id}/{data_id}_all_embeddings" 
                             
     embeddings = OpenAIEmbeddings()
-
-    prompt_template = f"""You are a chatbot assisting in a conversation with a human. Using both your built-in knowledge and the following extracted parts of a long document, 
-                        please provide an answer to the given question. 
-                        Your answer should be as detailed as possible if necessary. 
-                        If the document does not contain relevant information for answering the question, please make that clear in your response.
+    if option == '1':
+        prompt_template = f"""You are a Ebook generator. Generate the ebook using your built-in knowledge and the following extracted parts of a long document.
+                        The Ebook should be as detailed and long as possible. 
                         {{context}}
 
-                        Question: {{question}}
+                        Topic/Details: {{question}}
 
-                        Answer :"""
+                        Ebook :"""
+    if option == '2':
+        prompt_template = f"""You are a blog post generator .Generate a blog post about any topic the user wants .Use both your built-in knowledge and the following extracted parts of a long document, 
+                        to generate the blog post. 
+                        The generated blog post should be as detailed as possible if necessary. 
+                        
+                        {{context}}
+
+                        Topic/Details: {{question}}
+
+                        BlogPost :"""
+    else :
+        return{"message":"Choose option 1 for generating shrt ebook content and option 2 to generate a blog post"}
     
     PROMPT = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
     chain = load_qa_chain(llm=clarifai_llm, chain_type="stuff", prompt=PROMPT)
@@ -45,8 +56,8 @@ async def chat_chatbot(request: Request, data: dict):
     try:
         Vectordb = FAISS.load_local(persist_directory, embeddings)
         retriever = Vectordb.as_retriever(search_type="mmr")
-        docs = retriever.get_relevant_documents(query)
-        ans = chain({"input_documents": docs, "question": query}, return_only_outputs=True)
+        docs = retriever.get_relevant_documents(details)
+        ans = chain({"input_documents": docs, "question": details}, return_only_outputs=True)
         answer = ans['output_text']
         pattern = r"(chatbot:|Response:|Answer:|answer:)\s"
 
