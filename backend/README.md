@@ -32,8 +32,6 @@ Use this endpoint to initiate a chat with the Llama-2 Model.
 ```json
 {
  "details": "topic: finetunning chatgpt ,details:how to finetune chatgpt",
- "data_id": "12",
- "api": "paste clarifai-api-key",
  "option": "1"
 }
 ```
@@ -63,7 +61,6 @@ Endpoint: /trainpdf
 Request Body:
 
 file: Upload the PDF file.
-data_id: Specify the data ID as a string.
 
 
 
@@ -77,8 +74,7 @@ Use this endpoint to extract data from a youtube video and use it later as conte
 **Request Body:**
 ```json
 {
-    "link": "https://youtu.be/y2TnIs0kMZw?feature=shared",
-    "data_id":"12"
+    "link": "https://youtu.be/y2TnIs0kMZw?feature=shared"
 }
 
 ```
@@ -90,9 +86,10 @@ This endpoint deletes embeddings already stored for the specific data_id.
 HTTP Method: POST
 Endpoint: /delete
 
+- Send empty request body {}
 Request Body:
 ```json
 {
-    "data_id": "1"
+    
 }
 ```
