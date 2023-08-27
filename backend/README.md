@@ -21,7 +21,7 @@
 
 Use this endpoint to initiate a chat with the Llama-2 Model. 
 
-- Option patameter can be set to 1 to generate Short Ebook Contnet
+- Option patameter can be set to 1 to generate Short Ebook Content
   
 - Option patameter can be set to 2 to generate a blog post
   
