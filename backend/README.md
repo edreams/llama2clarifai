@@ -19,23 +19,28 @@
 
 ### 1. `/chat` Endpoint
 
-Use this endpoint to initiate a chat with the OpenAI model.
+Use this endpoint to initiate a chat with the Llama-2 Model. 
 
+- Option patameter can be set to 1 to generate Short Ebook Contnet
+  
+- Option patameter can be set to 2 to generate a blog post
+  
 - **HTTP Method:** POST
 - **Endpoint:** `/chat`
 
 **Request Body:**
 ```json
 {
- "query": "what is special about the api",
+ "details": "topic: finetunning chatgpt ,details:how to finetune chatgpt",
  "data_id": "12",
- "api": "clarifai-api-key"
+ "api": "paste clarifai-api-key",
+ "option": "1"
 }
 ```
 
 
 ### 2. `/generate_image_caption` Endpoint
-This endpoint generates a caption for an image using the OpenAI model.
+This endpoint generates a caption for an image using the blip model from clarifai.
 
 HTTP Method: POST
 Endpoint: /generate_image_caption
@@ -64,7 +69,7 @@ data_id: Specify the data ID as a string.
 
 ### 4. `/traintube` Endpoint
 
-Use this endpoint to initiate a chat with the OpenAI model.
+Use this endpoint to extract data from a youtube video and use it later as context to generate ebook or blog post.
 
 - **HTTP Method:** POST
 - **Endpoint:** `/traintube`
@@ -83,7 +88,7 @@ Use this endpoint to initiate a chat with the OpenAI model.
 This endpoint deletes embeddings already stored for the specific data_id.
 
 HTTP Method: POST
-Endpoint: /generate_image_caption
+Endpoint: /delete
 
 Request Body:
 ```json
