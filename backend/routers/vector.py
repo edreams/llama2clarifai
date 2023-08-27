@@ -19,8 +19,9 @@ router = APIRouter()
 
 
 
-@router.post("/trainpdf")
-async def train(file: UploadFile = File(...), data_id: str = Form(...)):
+@router.post("/add_data")
+async def train(file: UploadFile = File(...)):
+    data_id='200'
     try:
         persist_directory = f'trained_db/{data_id}/{data_id}_all_embeddings'
         
@@ -89,7 +90,7 @@ def log_error(data_id, error_message, traceback_str):
 
 @router.post('/delete')
 async def deletetxt(request: Request, data: dict):
-    data_id = data.get('data_id')
+    data_id = data.get('data_id','200')
     delete_directory = f'trained_db/{data_id}'
 
     # Check if the directory exists
