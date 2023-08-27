@@ -1,1 +1,4 @@
 .env
+trained_db
+*.pyc
+train_error_logs
