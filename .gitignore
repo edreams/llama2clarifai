@@ -12,6 +12,11 @@ node_modules
 __pycache__/
 *.py[cod]
 *$py.class
+backend/nohup.out
+backend/requirements_2.txt
+backend/routers/audio.py
+frontend/nohup.out
+frontend/src/nohup.out
 
 # C extensions
 *.so
