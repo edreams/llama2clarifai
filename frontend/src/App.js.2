@@ -4,7 +4,9 @@ import { ClerkProvider } from '@clerk/clerk-react'; // Import ClerkProvider
 
 import ChatPage from './ChatPage';
 import GenerateImageCaptionPage from './GenerateImageCaptionPage';
-import Add_Data from './Add_Data';
+import TrainPDFPage from './TrainPDFPage';
+import TrainTubePage from './TrainTubePage';
+import DeleteDataPage from './DeleteDataPage';
 
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -24,16 +26,20 @@ function App() {
               <Typography variant="h6" style={{ flexGrow: 1 }}>
                 Schrödinger's ClarifaiLlama Hackathon: Where Projects Purr and Ponder
               </Typography>
-              <Button color="inherit" component={Link} to="/chat">Generator</Button>
+              <Button color="inherit" component={Link} to="/chat">Chat</Button>
               <Button color="inherit" component={Link} to="/generate-image-caption">Image Caption</Button>
-              <Button color="inherit" component={Link} to="/add-data">Add Data</Button>
+              <Button color="inherit" component={Link} to="/trainpdf">Train PDF</Button>
+              <Button color="inherit" component={Link} to="/traintube">Train Tube</Button>
+              <Button color="inherit" component={Link} to="/delete-data">Delete Data</Button>
             </Toolbar>
           </AppBar>
           <Container>
             <Routes>
               <Route path="/chat" element={<ChatPage />} />
               <Route path="/generate-image-caption" element={<GenerateImageCaptionPage />} />
-              <Route path="/add-data" element={<Add_Data />} />
+              <Route path="/trainpdf" element={<TrainPDFPage />} />
+              <Route path="/traintube" element={<TrainTubePage />} />
+              <Route path="/delete-data" element={<DeleteDataPage />} />
             </Routes>
           </Container>
         </div>

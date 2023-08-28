@@ -9,6 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function ChatPage() {
   const [details, setDetails] = useState('');
@@ -16,28 +17,32 @@ function ChatPage() {
   const [api, setApi] = useState('');
   const [option, setOption] = useState('1');
   const [response, setResponse] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const requestBody = {
         details: details,
-        data_id: dataId,
+        data_id: 200,
         api: api,
         option: option
       };
-      
+
       const response = await axios.post('/api/chat', requestBody);
       setResponse(response.data.answer || response.data.error || 'An error occurred.');
     } catch (error) {
       console.error('Error:', error);
       setResponse('An error occurred.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <Box sx={{ mt: 3, mx: 'auto', width: '80%' }}>
-      <Typography variant="h4" align="center">Chat Page</Typography>
+      <Typography variant="h4" align="center">Generate</Typography>
       <Paper elevation={3} sx={{ p: 3, mt: 2 }}>
         <form onSubmit={handleSubmit}>
           <TextField 
@@ -46,22 +51,6 @@ function ChatPage() {
             variant="outlined" 
             value={details} 
             onChange={(e) => setDetails(e.target.value)} 
-            sx={{ mb: 2 }}
-          />
-          <TextField 
-            fullWidth 
-            label="Data ID" 
-            variant="outlined" 
-            value={dataId} 
-            onChange={(e) => setDataId(e.target.value)} 
-            sx={{ mb: 2 }}
-          />
-          <TextField 
-            fullWidth 
-            label="Clarifai API Key" 
-            variant="outlined" 
-            value={api} 
-            onChange={(e) => setApi(e.target.value)} 
             sx={{ mb: 2 }}
           />
           <FormControl fullWidth variant="outlined" sx={{ mb: 2 }}>
@@ -75,7 +64,11 @@ function ChatPage() {
               <MenuItem value="2">Generate Blog Post</MenuItem>
             </Select>
           </FormControl>
-          <Button variant="contained" color="primary" type="submit">Generate</Button>
+          {loading ? (
+            <CircularProgress />
+          ) : (
+            <Button variant="contained" color="primary" type="submit">Generate</Button>
+          )}
         </form>
       </Paper>
       <Paper elevation={1} sx={{ mt: 3, p: 2 }}>

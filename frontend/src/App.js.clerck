@@ -1,0 +1,75 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
+import { ClerkProvider, SignedIn, SignIn, SignUp } from '@clerk/clerk-react';
+
+import ChatPage from './ChatPage';
+import GenerateImageCaptionPage from './GenerateImageCaptionPage';
+import TrainPDFPage from './TrainPDFPage';
+import TrainTubePage from './TrainTubePage';
+import DeleteDataPage from './DeleteDataPage';
+
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+
+function App() {
+  const clerkPubKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
+
+  return (
+    <ClerkProvider publishableKey={clerkPubKey}>
+      <Router>
+        <div>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="h6" style={{ flexGrow: 1 }}>
+                Schrödinger's ClarifaiLlama Hackathon: Where Projects Purr and Ponder
+              </Typography>
+              <Button color="inherit" component={Link} to="/chat">Chat</Button>
+              <Button color="inherit" component={Link} to="/generate-image-caption">Image Caption</Button>
+              <Button color="inherit" component={Link} to="/trainpdf">Train PDF</Button>
+              <Button color="inherit" component={Link} to="/traintube">Train Tube</Button>
+              <Button color="inherit" component={Link} to="/delete-data">Delete Data</Button>
+            </Toolbar>
+          </AppBar>
+          <Container>
+            <Routes>
+              <Route path="/sign-in/*" element={<SignIn />} />
+              <Route path="/sign-up/*" element={<SignUp />} />
+              <Route path="/chat" element={
+                <SignedIn>
+                  <ChatPage />
+                </SignedIn>
+              } />
+              <Route path="/generate-image-caption" element={
+                <SignedIn>
+                  <GenerateImageCaptionPage />
+                </SignedIn>
+              } />
+              <Route path="/trainpdf" element={
+                <SignedIn>
+                  <TrainPDFPage />
+                </SignedIn>
+              } />
+              <Route path="/traintube" element={
+                <SignedIn>
+                  <TrainTubePage />
+                </SignedIn>
+              } />
+              <Route path="/delete-data" element={
+                <SignedIn>
+                  <DeleteDataPage />
+                </SignedIn>
+              } />
+              <Route path="*" element={<Navigate to="/sign-in" />} />
+            </Routes>
+          </Container>
+        </div>
+      </Router>
+    </ClerkProvider>
+  );
+}
+
+export default App;
+

@@ -33,14 +33,6 @@ function GenerateImageCaptionPage() {
                     onChange={e => setImageUrl(e.target.value)} 
                     sx={{ mb: 2 }}
                 />
-                <TextField 
-                    fullWidth 
-                    label="Clarifai API Key" 
-                    variant="outlined" 
-                    value={api} 
-                    onChange={e => setApi(e.target.value)} 
-                    sx={{ mb: 2 }}
-                />
                 <Button variant="contained" color="primary" onClick={generateCaption}>Generate Caption</Button>
                 <Paper elevation={1} sx={{ mt: 3, p: 2 }}>
                     <Typography variant="body1" component="pre">{JSON.stringify(response, null, 2)}</Typography>
